@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para vos – Ahora VoS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #e8f0ff, #fef6f9);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background: linear-gradient(135deg, #1e1e2f, #3a3a4a);
+      color: #f0f0f0;
+    }
+    header {
+      background-color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    .dark-mode header { background-color: #2a2a3b; }
+    header h1 { margin: 0; font-style: italic; font-size: 1.8rem; }
+    nav { display: flex; gap: 1rem; }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .dark-mode nav a { color: #f0f0f0; }
+    nav a:hover { color: #f59e0b; }
+    .mode-toggle {
+      border: 2px solid #333;
+      background: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dark-mode .mode-toggle {
+      border-color: #f0f0f0;
+      color: #f0f0f0;
+    }
+    main {
+      margin-top: 140px;
+      padding: 2rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: #6c63ff;
+      margin-bottom: 1.5rem;
+    }
+    .playlists-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      padding: 3rem 1rem;
+    }
+    .card {
+      width: 250px;
+      height: 350px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transform: rotate(-3deg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .card:hover {
+      transform: scale(1.05) rotate(0deg);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .label {
+      font-size: 1.3rem;
+      margin-top: -1.5rem;
+      color: #555;
+    }
+    .audio-control {
+      margin-top: 3rem;
+    }
+    .audio-button {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, #63a4ff, #ff63a4);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      font-weight: bold;
+    }
+    .audio-button:hover {
+      background: linear-gradient(45deg, #ff63a4, #63a4ff);
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ahora VoS</h1>
+    <nav>
+      <a href="index.html">Tirá las cartas</a>
+      <a href="index1.html">¿Quienes somos?</a>
+      <a href="index3.html">Disfruta</a>
+    </nav>
+    <button class="mode-toggle" onclick="toggleMode()">Modo oscuro</button>
+  </header>
+  <main>
+    <h2>Para vos</h2>
+    <p>Playlist que acompañan tu experiencia con las cartas. Elegí según lo que necesites sentir hoy: felicidad, nostalgia o simplemente el deseo de estar más vivo.</p>
+
+    <div class="playlists-container">
+      <div>
+        <div class="card" onclick="window.open('https://open.spotify.com/playlist/0OEv9x59hYHib0NCMFU4VE?si=yzCoN58URcuqVFZpLpSPFw', '_blank')">
+          <img src="felicidad.jpg" alt="Felicidad">
+        </div>
+        <div class="label">Felicidad</div>
+      </div>
+      <div>
+        <div class="card" onclick="window.open('https://open.spotify.com/playlist/7GNzYk5CyKMxcPkaY5MMb3?si=j3IUmOBdRyizD_PS9m_1Xw', '_blank')">
+          <img src="vivo.jpg" alt="Vivo">
+        </div>
+        <div class="label">Vivo</div>
+      </div>
+      <div>
+        <div class="card" onclick="window.open('https://open.spotify.com/playlist/2KRWt4MvUSoYMfjxlK94v7?si=iKJlIj9iTwabLi_UDvmHyw', '_blank')">
+          <img src="nostalgia.jpg" alt="Nostalgia">
+        </div>
+        <div class="label">Nostalgia</div>
+      </div>
+    </div>
+
+    <div class="audio-control">
+      <button class="audio-button" onclick="toggleAudio(this)">▶ Acompañar</button>
+      <audio id="bg-audio" src="Qué bonito que está el cielo - Aliss.mp3"></audio>
+    </div>
+  </main>
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const btn = document.querySelector('.mode-toggle');
+      btn.textContent = body.classList.contains('dark-mode') ? 'Modo claro' : 'Modo oscuro';
+    }
+
+    function toggleAudio(button) {
+      const audio = document.getElementById('bg-audio');
+      if (audio.paused) {
+        audio.play();
+        button.textContent = '⏸ Pausar';
+      } else {
+        audio.pause();
+        button.textContent = '▶ Acompañar';
+      }
+    }
+  </script>
+</body>
+</html>

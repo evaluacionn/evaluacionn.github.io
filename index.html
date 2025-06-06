@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahora VoS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #f8f9d2, #e4f2f0);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background: linear-gradient(135deg, #1e1e2f, #3a3a4a);
+      color: #f0f0f0;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+
+    .dark-mode header { background-color: #2a2a3b; }
+    header h1 { margin: 0; font-style: italic; font-size: 1.8rem; }
+    nav { display: flex; gap: 1rem; }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .dark-mode nav a { color: #f0f0f0; }
+    nav a:hover { color: #f59e0b; }
+
+    .mode-toggle {
+      border: 2px solid #333;
+      background: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dark-mode .mode-toggle {
+      border-color: #f0f0f0;
+      color: #f0f0f0;
+    }
+
+    main {
+      padding-top: 140px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: #6c63ff;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 280px;
+      height: 360px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+    }
+
+    .card:hover { transform: rotateY(180deg); }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .card-front {
+      background-color: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .card-back {
+      background-color: #fff;
+      padding: 1rem;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .card-back p { color: #555; }
+    .dark-mode .card-front { background-color: #3a3a4a; }
+    .dark-mode .card-back {
+      background-color: #2e2e3e;
+      color: #f0f0f0;
+    }
+
+    .btn-container { margin: 3rem auto; }
+    .btn-container a {
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(45deg, #63a4ff, #ff63a4);
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn-container a:hover {
+      background: linear-gradient(45deg, #ff63a4, #63a4ff);
+    }
+
+    footer {
+      background-color: #fff;
+      padding: 1rem;
+      text-align: center;
+      color: #666;
+      margin-top: 4rem;
+      transition: background 0.3s;
+    }
+    .dark-mode footer {
+      background-color: #2a2a3b;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ahora VoS</h1>
+    <nav>
+      <a href="index1.html">¿Quiénes somos?</a>
+      <a href="index2.html">Para vos</a>
+      <a href="index3.html">Disfruta</a>
+    </nav>
+    <button class="mode-toggle" onclick="toggleMode()">Modo oscuro</button>
+  </header>
+
+  <main>
+    <h2>Descubre quién eres</h2>
+    <div id="cards-container" class="cards-container"></div>
+    <div class="btn-container">
+      <a href="#" onclick="shuffleCards(event)">Ver otras cartas</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Contacto: ahora.vos@gmail.com</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    function toggleMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const btn = document.querySelector('.mode-toggle');
+      btn.textContent = body.classList.contains('dark-mode') ? 'Modo claro' : 'Modo oscuro';
+    }
+
+    const cartas = [
+      { img: 'carta1p.png', texto: 'Preguntas que acompañan tu despertar emocional, espiritual y actitudinal.' },
+      { img: 'carta9a.png', texto: 'Afirmaciones diarias para fortalecer tu confianza y energía.' },
+      { img: 'carta2p.png', texto: 'Un llamado suave para volver a vos. La vida es ahora.' },
+      { img: 'carta10a.png', texto: 'Una herramienta para sentirte mejor y ser más.' },
+      { img: 'carta4p.png', texto: 'Despertar emocional, espiritual y actitudinal.' },
+      { img: 'carta11a.png', texto: 'Recordarte quién sos con afirmaciones poderosas.' },
+      { img: 'carta8p.png', texto: 'Conecta con tu ser y eleva tu energía interior.' },
+      { img: 'carta12a.png', texto: 'Cada día es una oportunidad para reencontrarte con vos.' }
+    ];
+
+    function getRandomCards(n) {
+      const shuffled = cartas.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+      const selected = getRandomCards(2);
+      selected.forEach((card, index) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <div class="card-face card-front">
+            <img src="${card.img}" alt="Carta ${index + 1}" />
+          </div>
+          <div class="card-face card-back">
+            <p>${card.texto}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function shuffleCards(e) {
+      e.preventDefault();
+      const container = document.getElementById('cards-container');
+      container.style.opacity = 0;
+      setTimeout(() => {
+        renderCards();
+        container.style.opacity = 1;
+        AOS.refresh();
+      }, 300);
+    }
+
+    window.addEventListener('DOMContentLoaded', renderCards);
+  </script>
+</body>
+</html>

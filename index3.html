@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprar – Ahora VoS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #f8f9d2, #e4f2f0);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+      color: #f0f0f0;
+    }
+    header {
+      background-color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    .dark-mode header {
+      background-color: #2a2a3b;
+    }
+    header h1 {
+      margin: 0;
+      font-style: italic;
+      font-size: 1.8rem;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .dark-mode nav a {
+      color: #f0f0f0;
+    }
+    nav a:hover {
+      color: #f59e0b;
+    }
+    .mode-toggle {
+      border: 2px solid #333;
+      background: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dark-mode .mode-toggle {
+      border-color: #f0f0f0;
+      color: #f0f0f0;
+    }
+    main {
+      padding: 2rem;
+      margin-top: 120px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2.4rem;
+      color: #6c63ff;
+    }
+    .product img {
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .cart-controls {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .cart-controls button {
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .cart-controls button:hover {
+      background-color: #5548d9;
+    }
+    .form-section, .tracking {
+      max-width: 500px;
+      margin: 2rem auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+    body.dark-mode .form-section,
+    body.dark-mode .tracking {
+      background-color: #3a3a3a;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button.finalizar {
+      margin-top: 1.5rem;
+      background-color: #63a4ff;
+      color: white;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button.finalizar:hover {
+      background-color: #4b8dd6;
+    }
+    .step {
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    body.dark-mode .step {
+      background-color: #555;
+    }
+    .step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .thank-you {
+      margin: 2rem 0;
+      font-size: 1.2rem;
+      color: #3a3a3a;
+      font-style: italic;
+    }
+    body.dark-mode .thank-you {
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ahora VoS</h1>
+    <nav>
+      <a href="index.html">Tirá las cartas</a>
+      <a href="index1.html">¿Quienes somos?</a>
+      <a href="index2.html">Para vos</a>
+    </nav>
+    <button class="mode-toggle" onclick="toggleDarkMode()">Modo oscuro</button>
+  </header>
+  <main>
+    <h2>Comprá tus Cartas Ahora VoS</h2>
+    <p>Cartas para conectar contigo mismo y los demás. <strong>120 Bs por set</strong>.</p>
+
+    <div class="product">
+      <img src="caja.png" alt="Cartas Ahora Vos" />
+      <div class="price">Precio por set: 120 Bs</div>
+      <div class="cart-controls">
+        <button onclick="decreaseQty()">-</button>
+        <span id="quantity">1</span>
+        <button onclick="increaseQty()">+</button>
+      </div>
+      <div class="total">Total: <span id="totalPrice">120</span> Bs</div>
+    </div>
+
+    <div class="form-section" id="formulario">
+      <h3>Método de Envío</h3>
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" required />
+
+      <h3>Método de Pago</h3>
+      <label for="metodo">Elegí un método:</label>
+      <select id="metodo">
+        <option value="qr">QR</option>
+        <option value="efectivo">Efectivo</option>
+      </select>
+
+      <button class="finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+    </div>
+
+    <div class="tracking" id="seguimiento" style="display:none;">
+      <h3>Seguimiento de tu pedido</h3>
+      <div class="step" id="paso1">📦 Pedido procesado</div>
+      <div class="step" id="paso2">🚚 En camino</div>
+      <div class="step" id="paso3">🏠 Entregado</div>
+      <div class="thank-you">¡Gracias por tu compra! Pronto recibirás tus cartas ✨</div>
+      <button class="finalizar" onclick="volverInicio()">Volver al inicio</button>
+    </div>
+  </main>
+  <script>
+    let quantity = 1;
+    const pricePerSet = 120;
+
+    function updateTotal() {
+      document.getElementById('quantity').textContent = quantity;
+      document.getElementById('totalPrice').textContent = quantity * pricePerSet;
+    }
+
+    function increaseQty() {
+      quantity++;
+      updateTotal();
+    }
+
+    function decreaseQty() {
+      if (quantity > 1) {
+        quantity--;
+        updateTotal();
+      }
+    }
+
+    function finalizarCompra() {
+      const direccion = document.getElementById('direccion').value;
+      if (!direccion.trim()) {
+        alert('Por favor ingresá una dirección de envío.');
+        return;
+      }
+      document.getElementById('formulario').style.display = 'none';
+      document.querySelector('.product').style.display = 'none';
+      document.querySelector('p').style.display = 'none';
+      document.querySelector('h2').textContent = '¡Gracias por tu compra!';
+      document.getElementById('seguimiento').style.display = 'block';
+
+      const pasos = ["paso1", "paso2", "paso3"];
+      pasos.forEach((id, index) => {
+        setTimeout(() => {
+          document.getElementById(id).classList.add('visible');
+        }, (index + 1) * 1500);
+      });
+    }
+
+    function volverInicio() {
+      window.location.href = "index.html";
+    }
+
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const btn = document.querySelector('.mode-toggle');
+      btn.textContent = body.classList.contains('dark-mode') ? 'Modo claro' : 'Modo oscuro';
+    }
+  </script>
+</body>
+</html>
