@@ -24,13 +24,14 @@ La página web acompaña este universo emocional y visual. Está organizada en v
 
 ## Cómo usar
 
-1. Cloná este repositorio o descargá los archivos.
-2. Abrí `index.html` en tu navegador.
-3. Explorá y disfrutá de la experiencia interactiva.
+1. Link a Netlify https://resplendent-zuccutto-6cfc5e.netlify.app
+2. Cloná este repositorio o descargá los archivos.
+3. Abrí `index.html` en tu navegador.
+4. Explorá y disfrutá de la experiencia interactiva.
 
 ## Autora
 
-**Dosnn** – Diseñadora visual y emocional.  
+**Dosnn** (Luz Vannia Villca Gallardo) – Diseñadora visual y emocional.  
 https://www.instagram.com/_.vanniaaaass?utm_source=ig_web_button_share_sheet&igsh=MXA0bWZ0bHZ0OWhvMw==
 
 ## Licencia
